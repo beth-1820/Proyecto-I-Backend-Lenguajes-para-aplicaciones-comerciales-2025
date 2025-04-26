@@ -4,7 +4,7 @@ public class Categoria {
 private int codCategoria;
 private String nombreCategoria;
 
-
+//
 
 public Categoria() {
 	
