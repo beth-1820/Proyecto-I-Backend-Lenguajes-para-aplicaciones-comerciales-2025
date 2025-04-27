@@ -1,4 +1,4 @@
-package cr.ac.ucr.paraiso.catalogo.gimnacio.domain;
+package cr.ac.ucr.paraiso.lenguajes.domain;
 
 public class MedidaCorporal {
 private int codMedida;
