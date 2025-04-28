@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Ejercicios</title>
+</head>
+<body>
+    <h1>Lista de Ejercicios</h1>
+
+    <ul>
+        <li th:each="ejercicio : ${ejercicios}">
+            <a th:href="@{'/listaEjercicios/' + ${ejercicio.codEjercicio}}" 
+               th:text="${ejercicio.nombreEjercicio}"></a>
+        </li>
+    </ul>
+</body>
+</html>
