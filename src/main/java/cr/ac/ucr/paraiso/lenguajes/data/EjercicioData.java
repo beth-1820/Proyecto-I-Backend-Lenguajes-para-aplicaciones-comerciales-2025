@@ -114,7 +114,7 @@ public class EjercicioData {
                 return equipo;
             }
         });
-    }
+    } 
     
     // Método para actualizar un ejercicio
     public void actualizarEjercicio(Ejercicio ejercicio) {
