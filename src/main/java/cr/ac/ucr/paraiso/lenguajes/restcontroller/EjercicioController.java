@@ -1,31 +1,36 @@
 package cr.ac.ucr.paraiso.lenguajes.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import cr.ac.ucr.paraiso.lenguajes.business.EjercicioBusiness;
+import cr.ac.ucr.paraiso.lenguajes.domain.Categoria;
 import cr.ac.ucr.paraiso.lenguajes.domain.Ejercicio;
 
-@Controller
+@RestController
+@RequestMapping("/api/ejercicios")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EjercicioController {
 
     @Autowired
     private EjercicioBusiness ejercicioBusiness;
 
-    // GET: para mostrar la página crearEjercicio.html
-    @RequestMapping(value = "/ejercicio", method = RequestMethod.GET)
-    public String iniciar(Model model) {
-    	model.addAttribute("categorias", ejercicioBusiness.obtenerTodasCategorias());
-        return "crearEjercicio";  
+    // GET: Obtener todas las categorías disponibles
+    @GetMapping("/categorias")
+    public List<Categoria> obtenerCategorias() {
+        return ejercicioBusiness.obtenerTodasCategorias();
     }
 
-    // POST: para recibir el JSON y guardar el ejercicio
-    @ResponseBody
-    @RequestMapping(value = "/ejercicio", method = RequestMethod.POST, consumes = "application/json")
-    public String crearEjercicio(@RequestBody Ejercicio ejercicio) {
+    // POST: Crear un nuevo ejercicio
+    @PostMapping
+    public Map<String, String> crearEjercicio(@RequestBody Ejercicio ejercicio) {
         ejercicioBusiness.crearEjercicio(ejercicio);
-        return "Ejercicio creado exitosamente"; // solo respuesta de texto
+        Map<String, String> response = new HashMap<>();
+        response.put("mensaje", "Ejercicio creado exitosamente");
+        return response;
     }
 }
