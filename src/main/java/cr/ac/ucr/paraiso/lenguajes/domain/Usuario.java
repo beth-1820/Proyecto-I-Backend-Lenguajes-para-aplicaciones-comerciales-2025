@@ -6,13 +6,15 @@ public class Usuario {
 	private String email;
 	private String password;
 	private int estado;
-	private Usuario rol;
+	private String rol;
 	
 	public Usuario(){
 		
 	}
 	
-	public Usuario(int idUser, String email, String password, int estado, Usuario rol) {
+	
+
+	public Usuario(int idUser, String email, String password, int estado, String rol) {
 		super();
 		this.idUser = idUser;
 		this.email = email;
@@ -20,6 +22,8 @@ public class Usuario {
 		this.estado = estado;
 		this.rol = rol;
 	}
+
+
 
 	public int getIdUser() {
 		return idUser;
@@ -53,12 +57,13 @@ public class Usuario {
 		this.estado = estado;
 	}
 
-	public Usuario getRol() {
+	public String getRol() {
 		return rol;
 	}
 
-	public void setRol(Usuario rol) {
+	public void setRol(String rol) {
 		this.rol = rol;
 	}
-
+	
+	
 }
