@@ -59,6 +59,7 @@ public class CategoriaBusiness {
             }
 
             if (categoria.getCodCategoria() <= 0) {
+                // Solo para nuevas categorías (cod_categoria <= 0)
                 categoriaData.insertarCategoria(categoria);
             } else {
                 categoriaData.actualizarCategoria(categoria);

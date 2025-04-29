@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -29,7 +32,17 @@ public class CategoriaData {
         }
     }
 
+    public int obtenerUltimoCodCategoria() {
+        String sql = "SELECT MAX(cod_categoria) FROM CategoriaEjercicio";
+        Integer maxCod = jdbcTemplate.queryForObject(sql, Integer.class);
+        return maxCod != null ? maxCod : 0;
+    }
+
     public void insertarCategoria(Categoria categoria) {
+        // Obtener el siguiente código disponible
+        int siguienteCod = obtenerUltimoCodCategoria() + 1;
+        categoria.setCodCategoria(siguienteCod);
+        
         String sql = "INSERT INTO CategoriaEjercicio (cod_categoria, nombre_categoria) VALUES (?, ?)";
         jdbcTemplate.update(sql, categoria.getCodCategoria(), categoria.getNombreCategoria());
     }
