@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Ejercicio</title>
+</head>
+<body>
+    <h1>Editar Ejercicio</h1>
+
+    <form th:action="@{/ejercicio/editar/{id}(id=${ejercicio.codEjercicio})}" method="POST">
+        <label>Nombre del Ejercicio:</label><br>
+        <input type="text" id="nombreEjercicio" name="nombreEjercicio" th:value="${ejercicio.nombreEjercicio}" required><br><br>
+
+        <label>Descripción:</label><br>
+        <textarea id="descripcion" name="descripcion" required th:text="${ejercicio.descripcion}"></textarea><br><br>
+
+        <label>Categoría:</label><br>
+        <select id="codCategoria" name="codCategoria" required>
+            <option th:each="categoria : ${categorias}"
+                    th:value="${categoria.codCategoria}" 
+                    th:text="${categoria.nombreCategoria}" 
+                    th:selected="${ejercicio.codCategoria == categoria.codCategoria}"></option>
+        </select><br><br>
+
+        <label>Equipo:</label><br>
+        <select id="codEquipo" name="codEquipo" required>
+            <option th:each="equipo : ${equipos}"
+                    th:value="${equipo.codEquipo}" 
+                    th:text="${equipo.nombreEquipo}" 
+                    th:selected="${ejercicio.codEquipo == equipo.codEquipo}"></option>
+        </select><br><br>
+
+        <button type="submit">Actualizar Ejercicio</button>
+    </form>
+
+    <a href="/vitalitycenter/ejercicios">Volver a la lista</a>
+</body>
+</html>

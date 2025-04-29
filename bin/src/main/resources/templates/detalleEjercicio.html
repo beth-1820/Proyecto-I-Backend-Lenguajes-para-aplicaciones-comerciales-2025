@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Ejercicio</title>
+</head>
+<body>
+    <h1 th:text="${ejercicio.nombreEjercicio}"></h1>
+	
+	<p><strong>Descripción:</strong> <span th:text="${ejercicio.descripcion}"></span></p>
+	<p><strong>Categoría:</strong> <span th:text="${categoria.nombreCategoria}"></span></p> <!-- Mostrar el nombre de la categoría -->
+	<p><strong>Equipo:</strong> <span th:text="${equipo.nombreEquipo}"></span></p> <!-- Mostrar el nombre del equipo -->
+
+
+    <!-- Formulario para eliminar el ejercicio -->
+    <form th:action="@{'/ejercicio/' + ${ejercicio.codEjercicio}}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit">Eliminar Ejercicio</button>
+    </form>
+
+    <a href="/vitalitycenter/listaEjercicios">Volver a la lista</a>
+	
+	<!-- Enlace para editar el ejercicio -->
+	<a th:href="@{'/ejercicio/editar/' + ${ejercicio.codEjercicio}}">Editar Ejercicio</a>
+</body>
+</html>
