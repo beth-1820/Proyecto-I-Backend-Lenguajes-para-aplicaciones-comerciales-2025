@@ -2,13 +2,18 @@ package cr.ac.ucr.paraiso.lenguajes.data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import cr.ac.ucr.paraiso.lenguajes.domain.Usuario;
 
 @Repository
 public class UsuarioData {
+    private static final Logger logger = LoggerFactory.getLogger(UsuarioData.class);
     private final JdbcTemplate jdbcTemplate;
 
     public UsuarioData(JdbcTemplate jdbcTemplate) {
@@ -16,10 +21,19 @@ public class UsuarioData {
     }
 
     public Usuario autenticar(int idUser, String password) {
-        String sql = "SELECT idUser, email, password, estado, rol FROM Usuario WHERE idUser = ? AND password = ?";
+        String sql = "EXEC autenticar_usuario ?, ?";
         try {
-            return jdbcTemplate.queryForObject(sql, new Object[]{idUser, password}, new UsuarioRowMapper());
+            logger.info("Ejecutando procedimiento almacenado para autenticar usuario: " + idUser);
+            return jdbcTemplate.queryForObject(
+                sql, 
+                new Object[]{idUser, password}, 
+                new UsuarioRowMapper()
+            );
+        } catch (EmptyResultDataAccessException e) {
+            logger.warn("Usuario no encontrado o credenciales incorrectas para idUser: " + idUser);
+            return null;
         } catch (Exception e) {
+            logger.error("Error al autenticar al usuario con idUser: " + idUser, e);
             return null;
         }
     }
@@ -32,7 +46,6 @@ public class UsuarioData {
             usuario.setEmail(rs.getString("email"));
             usuario.setPassword(rs.getString("password"));
             usuario.setEstado(rs.getInt("estado"));
-            // Asumiendo que modificaremos la clase Usuario para tener rol como String
             usuario.setRol(rs.getString("rol"));
             return usuario;
         }
