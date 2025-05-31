@@ -50,6 +50,18 @@ public class CategoriaBusiness {
             throw new Exception("Error al buscar la categoría: " + e.getMessage());
         }
     }
+    
+    public Categoria buscarCategoriaPorNombre(String nombreCategoria) throws Exception {
+        try {
+            Categoria categoria = categoriaData.buscarCategoriaPorNombre(nombreCategoria);
+            if (categoria == null) {
+                throw new Exception("No se encontró la categoría con nombre: " + nombreCategoria);
+            }
+            return categoria;
+        } catch (Exception e) {
+            throw new Exception("Error al buscar la categoría por nombre: " + e.getMessage());
+        }
+    }
 
     public void guardarCategoria(Categoria categoria) throws Exception {
         try {

@@ -31,6 +31,15 @@ public class CategoriaData {
             return null;
         }
     }
+    
+    public Categoria buscarCategoriaPorNombre(String nombreCategoria) {
+        try {
+            String sql = "SELECT * FROM CategoriaEjercicio WHERE nombre_categoria = ?";
+            return jdbcTemplate.queryForObject(sql, new Object[]{nombreCategoria}, categoriaMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 
     public int obtenerUltimoCodCategoria() {
         String sql = "SELECT MAX(cod_categoria) FROM CategoriaEjercicio";
@@ -39,12 +48,21 @@ public class CategoriaData {
     }
 
     public void insertarCategoria(Categoria categoria) {
-        // Obtener el siguiente código disponible
+        //Obtiene el siguiente código disponible
         int siguienteCod = obtenerUltimoCodCategoria() + 1;
         categoria.setCodCategoria(siguienteCod);
         
-        String sql = "INSERT INTO CategoriaEjercicio (cod_categoria, nombre_categoria) VALUES (?, ?)";
-        jdbcTemplate.update(sql, categoria.getCodCategoria(), categoria.getNombreCategoria());
+        String sql = "INSERT INTO CategoriaEjercicio (nombre_categoria) VALUES (?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[] {"cod_categoria"});
+            ps.setString(1, categoria.getNombreCategoria());
+            return ps;
+        }, keyHolder);
+
+        //Ahora recupera el valor generado por la base:
+        Integer idGenerado = keyHolder.getKey().intValue();
+        categoria.setCodCategoria(idGenerado);
     }
 
     public void actualizarCategoria(Categoria categoria) {

@@ -49,6 +49,20 @@ public class CategoriaRestController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<CategoriaDTO> obtenerCategoriaPorNombre(@PathVariable String nombre) {
+        try {
+            Categoria categoria = categoriaBusiness.buscarCategoriaPorNombre(nombre);
+            if (categoria != null) {
+                return new ResponseEntity<>(categoriaMapper.toDTO(categoria), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<CategoriaDTO> crearCategoria(@RequestBody CategoriaDTO categoriaDTO) {
