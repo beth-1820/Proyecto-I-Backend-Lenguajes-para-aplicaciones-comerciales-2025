@@ -27,21 +27,26 @@ public class InstructorData {
         return jdbcTemplate.query(sql, (rs, rowNum) -> mapInstructor(rs));
     }
 
-    public Instructor findById(int id) {
+    public Instructor findByIdYNombre(int id, String nombre) {
         String sql = """
             SELECT idInstructor, nombreInstructor, apellidosInstructor,
                    telefonoInstructor
             FROM   Instructor
             WHERE  idInstructor = ?
+               AND LOWER(nombreInstructor) LIKE LOWER(?)
             """;
-        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> mapInstructor(rs), id);
+        return jdbcTemplate.queryForObject(sql, 
+            (rs, rowNum) -> mapInstructor(rs), 
+            id, "%" + nombre + "%");
     }
 
-    public boolean existsById(int id) {
-        String sql = "SELECT COUNT(1) FROM Instructor WHERE idInstructor = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+
+    public boolean existsByIdOrNombre(int id, String nombre) {
+        String sql = "SELECT COUNT(1) FROM Instructor WHERE idInstructor = ? OR nombreInstructor = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id, nombre);
         return count != null && count > 0;
     }
+
 
 
 

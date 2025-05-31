@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cr.ac.ucr.paraiso.lenguajes.business.InstructorBusiness;
@@ -30,20 +31,21 @@ public class InstructorRestController {
 	    }
 
 	    @GetMapping("/{id}")
-	    public ResponseEntity<Instructor> getById(@PathVariable int id) {
-	        return ResponseEntity.ok(instructorBusiness.obtenerInstructorPorId(id));
+	    public ResponseEntity<Instructor> getById(@PathVariable int id, @RequestParam String nombre) {
+	        return ResponseEntity.ok(instructorBusiness.obtenerInstructorPorId(id, nombre));
 	    }
 
 	    @PutMapping("/{id}")
 	    public ResponseEntity<Void> update(@PathVariable int id, @RequestBody Instructor instructor) {
-	    	instructor.setIdInstructor(id);
-	        instructorBusiness.actualizarInstructor(instructor);
+	        instructor.setIdInstructor(id);
+	        instructorBusiness.actualizarInstructor(instructor); // usa id + nombre desde el cuerpo
 	        return ResponseEntity.ok().build();
 	    }
 
 	    @DeleteMapping("/{id}")
-	    public ResponseEntity<Void> delete(@PathVariable int id) {
-	    	instructorBusiness.eliminarInstructor(id);
+	    public ResponseEntity<Void> delete(@PathVariable int id, @RequestParam String nombre) {
+	        instructorBusiness.eliminarInstructor(id, nombre);
 	        return ResponseEntity.ok().build();
 	    }
+
 }

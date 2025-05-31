@@ -20,26 +20,27 @@ public class InstructorBusiness {
         return instructorData.findAll();
     }
 
-    public Instructor obtenerInstructorPorId(int id) { 
-        if (id <= 0 || !instructorData.existsById(id)) {
+    public Instructor obtenerInstructorPorId(int id, String nombre) { 
+        if (id <= 0 || !instructorData.existsByIdOrNombre(id, nombre)) {
             throw new IllegalArgumentException("ID de instructor no válido o no existe");
         }
-        return instructorData.findById(id);
+        return instructorData.findByIdYNombre(id, nombre); // este método debe retornar Instructor
     }
+
     
 
 
     public void actualizarInstructor(Instructor instructor) {
-        if (instructor.getIdInstructor() <= 0 || !instructorData.existsById(instructor.getIdInstructor())) {
+        if (instructor.getIdInstructor() <= 0 || !instructorData.existsByIdOrNombre(instructor.getIdInstructor(), instructor.getNombreInstructor())) {
             throw new IllegalArgumentException("No se puede actualizar: el ID de instructor no existe");
         }
         instructorData.update(instructor);
     }
-    
 
 
-    public void eliminarInstructor(int id) {
-        if (!instructorData.existsById(id)) {
+
+    public void eliminarInstructor(int id, String nombre) {
+        if (!instructorData.existsByIdOrNombre(id, nombre)) {
             throw new IllegalArgumentException("No se puede eliminar: el ID de instructor no existe");
         }
         instructorData.delete(id);
