@@ -20,8 +20,10 @@ public class UsuarioBusiness {
         return usuario;
     }
     
-    // Método para verificar si es admin
-    public boolean esAdmin(Usuario usuario) {
-        return usuario != null && "admin".equalsIgnoreCase(usuario.getRol());
+ // Método para verificar si es admin o instructor
+    public boolean tieneAcceso(Usuario usuario) {
+        return usuario != null && 
+               ("admin".equalsIgnoreCase(usuario.getRol()) || 
+                "instructor".equalsIgnoreCase(usuario.getRol()));
     }
 }

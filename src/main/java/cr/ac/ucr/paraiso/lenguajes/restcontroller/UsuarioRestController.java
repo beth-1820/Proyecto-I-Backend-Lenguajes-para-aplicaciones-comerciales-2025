@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/usuario")
 @CrossOrigin(origins = "*")
 public class UsuarioRestController {
     
@@ -44,6 +44,8 @@ public class UsuarioRestController {
             response.put("email", usuarioAutenticado.getEmail());
             response.put("rol", usuarioAutenticado.getRol());
             response.put("esAdmin", "admin".equalsIgnoreCase(usuarioAutenticado.getRol()));
+            response.put("esInstructor", "instructor".equalsIgnoreCase(usuarioAutenticado.getRol()));
+            response.put("tieneAcceso", usuarioBusiness.tieneAcceso(usuarioAutenticado));
             
             return ResponseEntity.ok(response);
         }
