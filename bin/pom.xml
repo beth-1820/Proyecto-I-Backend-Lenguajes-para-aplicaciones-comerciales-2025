@@ -77,12 +77,6 @@
 		    <version>0.11.5</version>
 		    <scope>runtime</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>cr.ac.ucr.paraiso</groupId>
-			<artifactId>videorent</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>
