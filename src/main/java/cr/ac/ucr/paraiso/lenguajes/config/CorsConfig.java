@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // permite a todos los endpoints
-                        .allowedOrigins("http://localhost:4200") // tu frontend
+                        .allowedOrigins("https://vitalitycenterproy.vercel.app") // tu frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }

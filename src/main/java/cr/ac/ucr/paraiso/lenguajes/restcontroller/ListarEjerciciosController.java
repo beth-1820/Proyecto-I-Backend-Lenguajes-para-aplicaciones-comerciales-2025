@@ -10,7 +10,7 @@ import cr.ac.ucr.paraiso.lenguajes.domain.Equipamiento;
 
 @RestController
 @RequestMapping("/api/ejercicios/listar")
-@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
+@CrossOrigin(origins = "https://vitalitycenterproy.vercel.app")
 public class ListarEjerciciosController {
 
     @Autowired

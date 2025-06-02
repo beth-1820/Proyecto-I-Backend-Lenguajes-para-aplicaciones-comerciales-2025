@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
+@CrossOrigin(origins = "https://vitalitycenterproy.vercel.app")
 @RequestMapping("/api/medidas")
 public class MedidaCorporalRestController {
 

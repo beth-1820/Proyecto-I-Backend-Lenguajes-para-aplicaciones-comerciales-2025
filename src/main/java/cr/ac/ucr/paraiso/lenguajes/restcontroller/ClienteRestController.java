@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://vitalitycenter.vercel.app") 
+@CrossOrigin(origins = "https://vitalitycenterproy.vercel.app")
 @RequestMapping(value= "/api/clientes")
 public class ClienteRestController {
 

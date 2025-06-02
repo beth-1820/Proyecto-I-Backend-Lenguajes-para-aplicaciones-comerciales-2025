@@ -13,7 +13,7 @@ import cr.ac.ucr.paraiso.lenguajes.domain.Ejercicio;
 
 @RestController
 @RequestMapping("/api/ejercicios")
-@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
+@CrossOrigin(origins = "https://vitalitycenterproy.vercel.app")
 public class EjercicioController {
 
     @Autowired

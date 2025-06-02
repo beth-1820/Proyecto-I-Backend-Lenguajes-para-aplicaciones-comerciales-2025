@@ -9,7 +9,7 @@ import cr.ac.ucr.paraiso.lenguajes.business.ItemRutinaEjercicioBusiness;
 import cr.ac.ucr.paraiso.lenguajes.domain.ItemRutinaEjercicio;
 
 @RestController
-@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
+@CrossOrigin(origins = "https://vitalitycenterproy.vercel.app")
 @RequestMapping("/api/item-rutina-ejercicio")
 public class ItemRutinaEjercicioRestController {
 

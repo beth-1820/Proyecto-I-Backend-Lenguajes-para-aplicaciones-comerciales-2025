@@ -19,7 +19,7 @@ import cr.ac.ucr.paraiso.lenguajes.domain.Rutina;
 import cr.ac.ucr.paraiso.lenguajes.dto.RutinaDTO;
 
 @RestController
-@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
+@CrossOrigin(origins = "https://vitalitycenterproy.vercel.app")
 @RequestMapping("/api/rutinas")
 public class RutinaRestController {
 

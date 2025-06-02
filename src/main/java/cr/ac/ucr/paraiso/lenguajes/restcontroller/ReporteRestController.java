@@ -8,7 +8,7 @@ import cr.ac.ucr.paraiso.lenguajes.business.RutinaBusiness;
 import cr.ac.ucr.paraiso.lenguajes.dto.ReporteRutinaDTO;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://vitalitycenterproy.vercel.app")
 @RequestMapping("/api/reportes")
 public class ReporteRestController {
 
