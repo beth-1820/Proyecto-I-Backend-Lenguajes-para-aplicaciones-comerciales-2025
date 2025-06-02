@@ -122,14 +122,14 @@ public class RutinaData {
         r.setObjetivoCliente(rs.getString("objetivoCliente"));
         r.setEnfermedadesCliente(rs.getString("enfermedadesCliente"));
 
+        // Obtiene relaciones por ID
         int idCliente = rs.getInt("idCliente");
         int idInstructor = rs.getInt("idInstructor");
-        String nombreInstructor = rs.getString("nombreInstructor");
 
-        // Busca los objetos relacionados
         r.setCliente(clienteData.findById(idCliente));
-        r.setInstructor(instructorData.findByIdYNombre(idInstructor, nombreInstructor));
+        r.setInstructor(instructorData.findById(idInstructor));
 
         return r;
     }
+
 }

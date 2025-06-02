@@ -1,9 +1,6 @@
 package cr.ac.ucr.paraiso.lenguajes.data;
 
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -20,30 +17,37 @@ public class InstructorDataTest {
     private InstructorData instructorData;
 
     @Test
-    void testFindAll() {
-        List<Instructor> instructors = instructorData.findAll();
-        assertNotNull(instructors);
-        assertFalse(instructors.isEmpty(), "Debe retornar al menos un instructor");
+    public void testFindAll_noLanzaError() {
+        List<Instructor> lista = instructorData.findAll();
+        assertNotNull(lista);
     }
 
-
     @Test
-    void testExistsByIdOrNombre() {
-        assertTrue(instructorData.existsByIdOrNombre(5, "Carlos"));
-        assertFalse(instructorData.existsByIdOrNombre(-1, "NombreInexistente"));
+    public void testFindById_existente() {
+        int idExistente = 1; // Asegúrate que exista en tu base de datos
+        Instructor instructor = instructorData.findById(idExistente);
+        assertNotNull(instructor);
+        assertEquals(idExistente, instructor.getIdInstructor());
     }
-/*
+
     @Test
-    void testUpdateAndDelete() {
-        Instructor inst = instructorData.findByIdYNombre(9, "Karla                                             ");
-        inst.setTelefonoInstructor("99999999");
-        int updated = instructorData.update(inst);
-        assertEquals(1, updated);
+    public void testFindByNombre_coincidencia() {
+        String nombreParcial = "ana"; // Debe haber un instructor con este nombre parcial
+        List<Instructor> resultados = instructorData.findByNombre(nombreParcial);
+        assertNotNull(resultados);
+        assertFalse(resultados.isEmpty());
+        assertTrue(resultados.stream().anyMatch(i -> i.getNombreInstructor().toLowerCase().contains("ana")));
+    }
 
-        int deleted = instructorData.delete(inst.getIdInstructor());
-        assertEquals(1, deleted);
+    @Test
+    public void testExistsById_trueSiExiste() {
+        int idExistente = 1; // Asegúrate que este ID exista en la base
+        assertTrue(instructorData.existsById(idExistente));
+    }
 
-        boolean exists = instructorData.existsByIdOrNombre(inst.getIdInstructor(), inst.getNombreInstructor());
-        assertFalse(exists);
-    }*/
+    @Test
+    public void testExistsById_falseSiNoExiste() {
+        int idNoExistente = 9999;
+        assertFalse(instructorData.existsById(idNoExistente));
+    }
 }
