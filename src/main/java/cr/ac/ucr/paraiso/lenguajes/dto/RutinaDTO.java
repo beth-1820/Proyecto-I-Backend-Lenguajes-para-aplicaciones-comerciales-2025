@@ -2,7 +2,9 @@ package cr.ac.ucr.paraiso.lenguajes.dto;
 
 import cr.ac.ucr.paraiso.lenguajes.domain.Cliente;
 import cr.ac.ucr.paraiso.lenguajes.domain.Instructor;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class RutinaDTO {
     private int codRutina;
@@ -13,7 +15,12 @@ public class RutinaDTO {
     private Cliente cliente;
     private Instructor instructor;
 
+    // ✅ Lista de ejercicios asociados
+    private List<ItemRutinaEjercicioDTO> ejercicios;
+
     public RutinaDTO() {}
+
+    // Getters y Setters
 
     public int getCodRutina() {
         return codRutina;
@@ -69,5 +76,13 @@ public class RutinaDTO {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+    }
+
+    public List<ItemRutinaEjercicioDTO> getEjercicios() {
+        return ejercicios;
+    }
+
+    public void setEjercicios(List<ItemRutinaEjercicioDTO> ejercicios) {
+        this.ejercicios = ejercicios;
     }
 }

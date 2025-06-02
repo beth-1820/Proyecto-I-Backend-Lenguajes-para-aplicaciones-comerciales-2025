@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import java.sql.PreparedStatement;
 
 import cr.ac.ucr.paraiso.lenguajes.domain.Rutina;
 import java.sql.Date;
@@ -30,14 +33,20 @@ public class RutinaData {
             VALUES (?, ?, ?, ?, ?, ?)
         """;
 
-        return jdbcTemplate.update(sql,
-                Date.valueOf(rutina.getFechaCreacion()),
-                Date.valueOf(rutina.getFechaRenovacion()),
-                rutina.getObjetivoCliente(),
-                rutina.getEnfermedadesCliente(),
-                rutina.getCliente().getIdCliente(),
-                rutina.getInstructor().getIdInstructor()
-        );
+        KeyHolder keyHolder = new GeneratedKeyHolder(); //obtener id y mandar para item
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"codRutina"});
+            ps.setDate(1, Date.valueOf(rutina.getFechaCreacion()));
+            ps.setDate(2, Date.valueOf(rutina.getFechaRenovacion()));
+            ps.setString(3, rutina.getObjetivoCliente());
+            ps.setString(4, rutina.getEnfermedadesCliente());
+            ps.setInt(5, rutina.getCliente().getIdCliente());
+            ps.setInt(6, rutina.getInstructor().getIdInstructor());
+            return ps;
+        }, keyHolder);
+
+        return keyHolder.getKey().intValue(); // Este es el ID generado
     }
 
     public List<Rutina> findAll() {
