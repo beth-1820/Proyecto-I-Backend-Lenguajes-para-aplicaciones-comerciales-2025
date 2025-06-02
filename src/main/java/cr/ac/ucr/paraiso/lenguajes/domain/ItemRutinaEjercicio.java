@@ -7,15 +7,9 @@ private int repeticionesEjercicio;
 private int codEjercicio; //puede ser null
 private int codRutina;   //puede ser null
 
-
-
-
 public ItemRutinaEjercicio() {
 	
 }
-
-
-
 
 public ItemRutinaEjercicio(int idItemRutinaEjercicio, int seriesEjercicio, int repeticionesEjercicio, int codEjercicio,
 		int codRutina) {

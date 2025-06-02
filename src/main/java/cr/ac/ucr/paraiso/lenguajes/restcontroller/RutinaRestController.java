@@ -35,12 +35,13 @@ public class RutinaRestController {
     public ResponseEntity<Rutina> getById(@PathVariable int id) {
         return ResponseEntity.ok(rutinaBusiness.obtenerRutinaPorId(id));
     }
-
+    
     @PostMapping
-    public ResponseEntity<String> crearRutina(@RequestBody RutinaDTO dto) {
-        rutinaBusiness.crearRutina(dto);
-        return ResponseEntity.ok("Rutina creada exitosamente");
+    public ResponseEntity<Integer> crearRutina(@RequestBody RutinaDTO dto) {
+        int codRutina = rutinaBusiness.crearRutinaConItems(dto);
+        return ResponseEntity.ok(codRutina);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable int id, @RequestBody Rutina rutina) {
