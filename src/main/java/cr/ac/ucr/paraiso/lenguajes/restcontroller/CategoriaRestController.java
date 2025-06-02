@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/categorias")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
 public class CategoriaRestController {
 
     @Autowired

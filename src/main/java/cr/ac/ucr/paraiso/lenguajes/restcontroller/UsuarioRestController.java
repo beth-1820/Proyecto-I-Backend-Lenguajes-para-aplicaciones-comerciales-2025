@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/usuario")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
 public class UsuarioRestController {
     
     @Autowired

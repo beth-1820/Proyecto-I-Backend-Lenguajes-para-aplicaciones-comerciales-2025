@@ -10,7 +10,7 @@ import cr.ac.ucr.paraiso.lenguajes.domain.Equipamiento;
 
 @RestController
 @RequestMapping("/api/ejercicios/editar")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
 public class editarEjercicioController {  // Nombre corregido en mayúscula
 
     @Autowired

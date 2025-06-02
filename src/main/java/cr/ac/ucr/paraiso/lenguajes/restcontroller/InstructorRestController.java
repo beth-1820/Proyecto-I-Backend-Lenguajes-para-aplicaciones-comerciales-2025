@@ -9,7 +9,7 @@ import cr.ac.ucr.paraiso.lenguajes.business.InstructorBusiness;
 import cr.ac.ucr.paraiso.lenguajes.domain.Instructor;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://vitalitycenter.vercel.app")
 @RequestMapping("/api/instructores")
 public class InstructorRestController {
 
