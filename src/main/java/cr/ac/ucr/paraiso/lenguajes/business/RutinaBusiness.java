@@ -12,6 +12,7 @@ import cr.ac.ucr.paraiso.lenguajes.domain.ItemRutinaEjercicio;
 import cr.ac.ucr.paraiso.lenguajes.domain.Rutina;
 import cr.ac.ucr.paraiso.lenguajes.dto.ItemRutinaEjercicioDTO;
 import cr.ac.ucr.paraiso.lenguajes.dto.RutinaDTO;
+import cr.ac.ucr.paraiso.lenguajes.dto.ReporteRutinaDTO;
 
 @Service
 public class RutinaBusiness {
@@ -76,6 +77,19 @@ public class RutinaBusiness {
             throw new IllegalArgumentException("No se puede eliminar: el ID de rutina no existe");
         }
         rutinaData.delete(id);
+    }
+    
+    public ReporteRutinaDTO obtenerReportePorCliente(int idCliente) {
+        Rutina rutina = rutinaData.findByClienteId(idCliente);
+        if (rutina == null) {
+            throw new IllegalArgumentException("El cliente con id " + idCliente + " no tiene rutina asignada.");
+        }
+
+        int codRutina = rutina.getCodRutina();
+        List<ItemRutinaEjercicio> listaItems = itemRutinaEjercicioData.findByCodRutina(codRutina);
+
+        ReporteRutinaDTO reporte = new ReporteRutinaDTO(rutina, listaItems);
+        return reporte;
     }
 }
 

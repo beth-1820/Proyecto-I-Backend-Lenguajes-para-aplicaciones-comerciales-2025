@@ -120,6 +120,27 @@ public class RutinaData {
     public int delete(int codRutina) {
         return jdbcTemplate.update("DELETE FROM Rutina WHERE codRutina = ?", codRutina);
     }
+    
+    public Rutina findByClienteId(int idCliente) {
+        String sql = """
+            SELECT TOP 1
+                   codRutina,
+                   fechaCreacion,
+                   fechaRenovacion,
+                   objetivoCliente,
+                   enfermedadesCliente,
+                   idCliente,
+                   idInstructor
+            FROM Rutina
+            WHERE idCliente = ?
+            """;
+        // Con TOP 1, SQL Server devolverá solo la primera fila que cumpla la condición
+        return jdbcTemplate.queryForObject(
+            sql,
+            (rs, rowNum) -> mapRutina(rs),
+            idCliente
+        );
+    }
 
     /* -------------------   MAPPING   ------------------- */
 
