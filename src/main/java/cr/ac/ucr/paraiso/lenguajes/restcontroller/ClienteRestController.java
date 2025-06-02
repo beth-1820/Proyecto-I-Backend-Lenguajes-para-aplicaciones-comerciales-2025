@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -32,6 +33,12 @@ public class ClienteRestController {
     public ResponseEntity<Cliente> getById(@PathVariable int id) {
         return ResponseEntity.ok(clienteBusiness.obtenerClientePorId(id));
     }
+    
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Cliente>> getByName(@RequestParam String nombre) {
+        return ResponseEntity.ok(clienteBusiness.buscarPorNombre(nombre));
+    }
+
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody Cliente cliente) {

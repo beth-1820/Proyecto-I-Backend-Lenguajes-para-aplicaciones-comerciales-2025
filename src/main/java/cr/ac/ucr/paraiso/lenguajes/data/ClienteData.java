@@ -35,6 +35,18 @@ public class ClienteData {
             """;
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> mapCliente(rs), id);
     }
+    
+    public List<Cliente> findByNombre(String nombre) {
+        String sql = """
+            SELECT idCliente, nombreCliente, apellidosCliente,
+                   fechaNacimiento, telefonoCliente, direccion,
+                   nombreContactoEmergencia, telContactoEmergencia
+            FROM Cliente
+            WHERE LOWER(nombreCliente) LIKE LOWER(?)
+        """;
+        return jdbcTemplate.query(sql, (rs, rowNum) -> mapCliente(rs), "%" + nombre + "%");
+    }
+
 
     public boolean existsById(int id) {
         String sql = "SELECT COUNT(1) FROM Cliente WHERE idCliente = ?";

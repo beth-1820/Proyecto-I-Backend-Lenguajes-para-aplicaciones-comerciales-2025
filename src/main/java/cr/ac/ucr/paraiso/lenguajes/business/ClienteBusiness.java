@@ -26,6 +26,14 @@ public class ClienteBusiness {
         return clienteData.findById(id);
     }
     
+    public List<Cliente> buscarPorNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("Debe proporcionar un nombre válido");
+        }
+        return clienteData.findByNombre(nombre.trim());
+    }
+
+    
     /////////////////////////////////////
     
     ////////////////////
