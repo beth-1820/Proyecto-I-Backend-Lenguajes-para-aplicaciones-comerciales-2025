@@ -23,7 +23,7 @@ public class RutinaBusiness {
         if (id <= 0 || !rutinaData.existsById(id)) {
             throw new IllegalArgumentException("ID de rutina no válido o no existe");
         }
-        return rutinaData.findById(id); // Este método debe retornar una Rutina
+        return rutinaData.findById(id); 
     }
 
     public void crearRutina(RutinaDTO dto) {

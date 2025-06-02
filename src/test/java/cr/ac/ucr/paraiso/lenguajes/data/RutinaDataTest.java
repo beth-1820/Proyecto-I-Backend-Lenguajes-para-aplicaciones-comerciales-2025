@@ -33,9 +33,8 @@ public class RutinaDataTest {
     public void setup() {
  
         jdbcTemplate.update("DELETE FROM Rutina");
-        jdbcTemplate.update("DELETE FROM Instructor");
         jdbcTemplate.update("DELETE FROM Cliente");
-        jdbcTemplate.update("DELETE FROM Usuario");
+        
 
      
         jdbcTemplate.update(

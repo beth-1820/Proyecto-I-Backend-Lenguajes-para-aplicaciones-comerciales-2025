@@ -30,20 +30,20 @@ public class InstructorDataTest {
 
     @Test
     void testFindByIdYNombre() {
-        Instructor inst = instructorData.findByIdYNombre(9, "Karla                                             ");
+        Instructor inst = instructorData.findByIdYNombre(35, "Carlos                                             ");
         assertNotNull(inst);
         assertEquals(1, inst.getIdInstructor());
     }
 
     @Test
     void testExistsByIdOrNombre() {
-        assertTrue(instructorData.existsByIdOrNombre(9, "Karla                                             "));
+        assertTrue(instructorData.existsByIdOrNombre(35, "Karla                                             "));
         assertFalse(instructorData.existsByIdOrNombre(-1, "NombreInexistente"));
     }
 
     @Test
     void testUpdateAndDelete() {
-        Instructor inst = instructorData.findByIdYNombre(9, "Karla                                             ");
+        Instructor inst = instructorData.findByIdYNombre(35, "Carlos                                             ");
         inst.setTelefonoInstructor("99999999");
         int updated = instructorData.update(inst);
         assertEquals(1, updated);
